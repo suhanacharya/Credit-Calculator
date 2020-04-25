@@ -84,6 +84,21 @@ elif type_of_operation == "annuity":
 			principal = math.floor((annuity / ((i * math.pow((1 + i), n)) / (math.pow(1 + i, n) - 1))))
 			print(f"Your credit principal = {principal}!")
 			print(f"Overpayment = {total_payment - principal}")
+	elif args["periods"] and args["interest"] and args["principal"] and not args["payment"]:
+		periods = int(args["periods"])
+		interest = float(args["interest"])
+		principal = int(args["principal"])
+		if periods <= 0 or principal <= 0 or interest <= 0:
+			print("Incorrect parameters!")
+			sys.exit()
+		else:
+			i = (interest / (12 * 100))
+			n = periods
+			annuity = math.ceil(principal * (i * math.pow(1 + i, n)) / (math.pow(1 + i, n) - 1))
+			total_payment = n * annuity
+
+			print(f"The payment = {annuity}!")
+			print(f"Overpayment = {total_payment - principal}")
 	else:
 		print("Incorrect parameters")
 		sys.exit()
@@ -91,42 +106,3 @@ elif type_of_operation == "annuity":
 else:
 	print("Incorrect parameters")
 	sys.exit()
-
-
-
-# print("""What do you want to calculate?
-# type "n" - for count of months,
-# type "a" - for annuity monthly payment,
-# type "p" - for credit principal:
-# """)
-#
-# # choice = input()
-# if choice == "n":
-#
-#     principal = int(input("Enter credit principal:\n"))
-#     payment = float(input("Enter monthly payment:\n"))
-#     interest = float(input("Enter credit interest:\n"))
-
-#
-# elif choice == "a":
-#     principal = int(input("Enter credit principal:\n"))
-#     n = int(input("Enter count of periods:\n"))
-#     interest = float(input("Enter credit interest:\n"))
-#
-#     i = (interest / (12 * 100))
-#     # n = math.ceil(math.log(payment / (payment - i * principal), 1 + i))
-#
-#     annuity = math.ceil(principal * (i * math.pow(1 + i, n)) / (math.pow(1 + i, n) - 1))
-#
-#     print(f"Your annuity payment = {annuity}!")
-# elif choice == "p":
-#     payment = float(input("Enter monthly payment:\n"))
-#     n = int(input("Enter count of periods:\n"))
-#     interest = float(input("Enter credit interest:\n"))
-#
-#     i = (interest / (12 * 100))
-#     annuity = payment
-#
-#     principal = round((annuity / ((i * math.pow((1 + i), n)) / (math.pow(1 + i, n) - 1))))
-#
-#     print(f"Your credit principal = {principal}!")
